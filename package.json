@@ -1,5 +1,5 @@
 {
-  "name": "Stakable-ERC20-ERC2917",
+  "name": "STAKING-ERC20-ERC2917",
   "version": "1.0.0",
   "description": "Testing EIP 2917 along side with EIP 20",
   "main": "index.js",
@@ -13,15 +13,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/helderjnpinto/Stakable-ERC20-ERC2917.git"
+    "url": "git+https://github.com/helderjnpinto/STAKING-ERC20-ERC2917.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/helderjnpinto/Stakable-ERC20-ERC2917/issues"
+    "url": "https://github.com/helderjnpinto/STAKING-ERC20-ERC2917/issues"
   },
-  "homepage": "https://github.com/helderjnpinto/Stakable-ERC20-ERC2917#readme",
+  "homepage": "https://github.com/helderjnpinto/STAKING-ERC20-ERC2917#readme",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
