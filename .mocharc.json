@@ -1,0 +1,7 @@
+{
+    "extension": ["ts"],
+    "spec": "./test/**/*.test.{js,ts}",
+    "watch-files": ["./src/**/*.sol", "./test/**/*.test.{js,ts}"],
+    "require": "ts-node/register",
+    "timeout": 50000
+  }

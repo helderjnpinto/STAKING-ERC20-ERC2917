@@ -1,0 +1,43 @@
+{
+  "name": "Stakable-ERC20-ERC2917",
+  "version": "1.0.0",
+  "description": "Testing EIP 2917 along side with EIP 20",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "waffle",
+    "test": "export NODE_ENV=test && mocha",
+    "test:dev": "export NODE_ENV=test && mocha -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helderjnpinto/Stakable-ERC20-ERC2917.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helderjnpinto/Stakable-ERC20-ERC2917/issues"
+  },
+  "homepage": "https://github.com/helderjnpinto/Stakable-ERC20-ERC2917#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@openzeppelin/contracts": "^3.4.1",
+    "@typechain/ethers-v5": "^6.0.5",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^14.14.35",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.0.32",
+    "hardhat": "^2.1.1",
+    "hardhat-typechain": "^0.3.5",
+    "mocha": "^8.3.2",
+    "ts-generator": "^0.1.1",
+    "ts-node": "^9.1.1",
+    "typechain": "^4.0.3",
+    "typescript": "^4.2.3"
+  }
+}
