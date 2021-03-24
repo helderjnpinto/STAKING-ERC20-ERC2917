@@ -7,6 +7,8 @@ import { BigNumber } from 'bignumber.js'
 import { ProveOfStake } from "../typechain/ProveOfStake";
 import { ERC2917Impl } from "../typechain/ERC2917Impl";
 
+const { waffle } = require("hardhat");
+
 use(solidity);
 
 function convertBigNumber(bnAmount: BigNumber | string, divider: number) {
@@ -16,7 +18,8 @@ function convertBigNumber(bnAmount: BigNumber | string, divider: number) {
 
 
 describe('Stake testing', () => {
-  let provider = new MockProvider();
+  // let provider = new MockProvider();
+  const provider = waffle.provider;
 
   const [staker1, staker2, staker3] = provider.getWallets();
 
@@ -55,7 +58,7 @@ describe('Stake testing', () => {
   }
 
   async function stake(wallet: Wallet, label: string = '', amount: number = 0) {
-    await StakeContract.connect(wallet).stake({ value: amount });
+    await StakeContract.connect(wallet).stake({ value: amount, gasLimit: 400000 });
     console.log('\t [Mine block] stake callee ' + label + ' ', amount)
   }
 
@@ -115,36 +118,36 @@ describe('Stake testing', () => {
   it('testing stake', async () => {
     await totalSupply()
     await stake(staker1, 'staker1', 100)
-    await getProductivity(staker1, 'staker1')
+    // await getProductivity(staker1, 'staker1')
     
-    await totalSupply()
+    // await totalSupply()
 
-    await stake(staker2, 'staker2', 100)
-    await totalSupply()
+    // await stake(staker2, 'staker2', 100)
+    // await totalSupply()
 
     
-    await printContractStatus()
+    // await printContractStatus()
 
-    await mineBlock()
+    // await mineBlock()
     
-    //
-    await takeWithBlock('staker1', staker1.address);
-		await takeWithBlock('staker2', staker2.address);
+    // //
+    // await takeWithBlock('staker1', staker1.address);
+		// await takeWithBlock('staker2', staker2.address);
 
-    await unStake(staker1, 'staker1', 100)
+    // await unStake(staker1, 'staker1', 100)
 
-    await takeWithBlock('staker1', staker1.address);
-    await takeWithBlock('staker2', staker2.address);
+    // await takeWithBlock('staker1', staker1.address);
+    // await takeWithBlock('staker2', staker2.address);
 
-    await takeWithBlock('staker1', staker1.address);
-    await takeWithBlock('staker2', staker2.address);
+    // await takeWithBlock('staker1', staker1.address);
+    // await takeWithBlock('staker2', staker2.address);
     
-    take(staker2, 'staker2')
+    // take(staker2, 'staker2')
 
-    await balanceOf(staker1, 'staker1')
-    await balanceOf(staker2, 'staker2')
-    await balanceOf(staker3, 'staker3')
-    await printContractStatus()
+    // await balanceOf(staker1, 'staker1')
+    // await balanceOf(staker2, 'staker2')
+    // await balanceOf(staker3, 'staker3')
+    // await printContractStatus()
 
 
     console.log('\t contract-> totalSupply: ', (await ERC2917Contract.totalSupply()).toString())

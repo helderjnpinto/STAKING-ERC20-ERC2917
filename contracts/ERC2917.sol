@@ -122,7 +122,7 @@ contract ERC2917Impl is IERC2917, ERC20, UpgradableProduct, UpgradableGovernance
         require(value > 0, 'INSUFFICIENT_PRODUCTIVITY');
         
         UserInfo storage userInfo = users[user];
-        require(userInfo.amount >= value, "WASABI: FORBIDDEN");
+        require(userInfo.amount >= value, "Decrease : FORBIDDEN");
         update();
         uint pending = userInfo.amount.mul(accAmountPerShare).div(1e12).sub(userInfo.rewardDebt);
         _transfer(address(this), user, pending);

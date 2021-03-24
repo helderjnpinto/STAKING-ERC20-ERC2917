@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "build": "waffle",
+    "build": "npx hardhat compile && waffle",
     "test": "export NODE_ENV=test && mocha",
     "test:dev": "export NODE_ENV=test && mocha -w"
   },

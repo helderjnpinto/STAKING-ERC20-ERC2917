@@ -15,8 +15,19 @@ import "hardhat-typechain";
 // Go to https://hardhat.org/config/ to learn more
 
 const config: HardhatUserConfig = {
+  networks: {
+    hardhat: {
+      gas: "auto"
+    },
+  },
   solidity: {
-    compilers: [{ version: "0.7.0", settings: {} }],
+    version: "0.7.0",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200
+      }
+    }
   },
 };
 
