@@ -1,8 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.6.6;
-import '../interface/IERC20.sol';
 
-interface IERC2917 is IERC20 {
+interface IERC2917 {
 
     /// @dev This emit when interests amount per block is changed by the owner of the contract.
     /// It emits with the old interests amount and the new interests amount.
@@ -30,15 +29,15 @@ interface IERC2917 is IERC20 {
     /// @return user's productivity and overall productivity.
     function getProductivity(address user) external view returns (uint, uint);
 
-    /// @notice increase a user's productivity.
-    /// @dev Note the best practice will be restrict the callee to prove of productivity's contract address.
-    /// @return true to confirm that the productivity added success.
-    function increaseProductivity(address user, uint value) external returns (bool);
+    // /// @notice increase a user's productivity.
+    // /// @dev Note the best practice will be restrict the callee to prove of productivity's contract address.
+    // /// @return true to confirm that the productivity added success.
+    // function increaseProductivity(address user, uint value) external returns (bool);
 
-    /// @notice decrease a user's productivity.
-    /// @dev Note the best practice will be restrict the callee to prove of productivity's contract address.
-    /// @return true to confirm that the productivity removed success.
-    function decreaseProductivity(address user, uint value) external returns (bool);
+    // /// @notice decrease a user's productivity.
+    // /// @dev Note the best practice will be restrict the callee to prove of productivity's contract address.
+    // /// @return true to confirm that the productivity removed success.
+    // function decreaseProductivity(address user, uint value) external returns (bool);
 
     /// @notice take() will return the interests that callee will get at current block height.
     /// @dev it will always calculated by block.number, so it will change when block height changes.
@@ -54,4 +53,10 @@ interface IERC2917 is IERC20 {
     /// @dev once it mint, the amount of interests will transfer to callee's address.
     /// @return the amount of interests minted.
     function mint() external returns (uint);
+
+    function enter(address account, uint256 amount) external returns (bool);
+    
+    function exit(address account, uint256 amount) external returns (bool);
+ 
+    function getStatus() external view returns (uint lastRewardBlock, uint totalProductivity, uint accAmountPerShare, uint mintCumulation);
 }

@@ -27,6 +27,7 @@ interface ProveOfStakeInterface extends ethers.utils.Interface {
     "nounce()": FunctionFragment;
     "stake()": FunctionFragment;
     "stakePool(address)": FunctionFragment;
+    "totalSupply()": FunctionFragment;
     "unstake(uint256)": FunctionFragment;
   };
 
@@ -38,6 +39,10 @@ interface ProveOfStakeInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: "nounce", values?: undefined): string;
   encodeFunctionData(functionFragment: "stake", values?: undefined): string;
   encodeFunctionData(functionFragment: "stakePool", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "unstake",
     values: [BigNumberish]
@@ -51,6 +56,10 @@ interface ProveOfStakeInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "nounce", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "stake", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "stakePool", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "unstake", data: BytesLike): Result;
 
   events: {};
@@ -131,6 +140,10 @@ export class ProveOfStake extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     unstake(
       _amountOut: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -173,6 +186,10 @@ export class ProveOfStake extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   unstake(
     _amountOut: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -206,6 +223,10 @@ export class ProveOfStake extends Contract {
       arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     unstake(
       _amountOut: BigNumberish,
@@ -251,6 +272,10 @@ export class ProveOfStake extends Contract {
       arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     unstake(
       _amountOut: BigNumberish,
@@ -299,6 +324,10 @@ export class ProveOfStake extends Contract {
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     unstake(
       _amountOut: BigNumberish,

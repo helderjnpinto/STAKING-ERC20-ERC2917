@@ -21,42 +21,39 @@ import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface ERC2917ImplInterface extends ethers.utils.Interface {
   functions: {
-    "allowance(address,address)": FunctionFragment;
-    "approve(address,uint256)": FunctionFragment;
+    "accAmountPerShare()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "changeInterestRatePerBlock(uint256)": FunctionFragment;
     "decimals()": FunctionFragment;
-    "decreaseProductivity(address,uint256)": FunctionFragment;
+    "deposit(address,uint256)": FunctionFragment;
+    "enter(address,uint256)": FunctionFragment;
+    "exit(address,uint256)": FunctionFragment;
     "getProductivity(address)": FunctionFragment;
+    "getStatus()": FunctionFragment;
     "governor()": FunctionFragment;
     "impl()": FunctionFragment;
-    "incNounce()": FunctionFragment;
-    "increaseProductivity(address,uint256)": FunctionFragment;
     "interestsPerBlock()": FunctionFragment;
+    "lastRewardBlock()": FunctionFragment;
     "mint()": FunctionFragment;
     "mintCumulation()": FunctionFragment;
     "name()": FunctionFragment;
-    "nounce()": FunctionFragment;
     "symbol()": FunctionFragment;
     "take()": FunctionFragment;
     "takeWithAddress(address)": FunctionFragment;
     "takeWithBlock()": FunctionFragment;
+    "totalProductivity()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
-    "transferFrom(address,address,uint256)": FunctionFragment;
     "upgradeGovernance(address)": FunctionFragment;
     "upgradeImpl(address)": FunctionFragment;
+    "usdPerBlock()": FunctionFragment;
     "users(address)": FunctionFragment;
-    "wasabiPerBlock()": FunctionFragment;
+    "withdrawal(address,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "allowance",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "approve",
-    values: [string, BigNumberish]
+    functionFragment: "accAmountPerShare",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
   encodeFunctionData(
@@ -65,22 +62,30 @@ interface ERC2917ImplInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "decreaseProductivity",
+    functionFragment: "deposit",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "enter",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exit",
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "getProductivity",
     values: [string]
   ): string;
+  encodeFunctionData(functionFragment: "getStatus", values?: undefined): string;
   encodeFunctionData(functionFragment: "governor", values?: undefined): string;
   encodeFunctionData(functionFragment: "impl", values?: undefined): string;
-  encodeFunctionData(functionFragment: "incNounce", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "increaseProductivity",
-    values: [string, BigNumberish]
-  ): string;
   encodeFunctionData(
     functionFragment: "interestsPerBlock",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lastRewardBlock",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "mint", values?: undefined): string;
@@ -89,7 +94,6 @@ interface ERC2917ImplInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
-  encodeFunctionData(functionFragment: "nounce", values?: undefined): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "take", values?: undefined): string;
   encodeFunctionData(
@@ -101,6 +105,10 @@ interface ERC2917ImplInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "totalProductivity",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "totalSupply",
     values?: undefined
   ): string;
@@ -109,45 +117,46 @@ interface ERC2917ImplInterface extends ethers.utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferFrom",
-    values: [string, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "upgradeGovernance",
     values: [string]
   ): string;
   encodeFunctionData(functionFragment: "upgradeImpl", values: [string]): string;
-  encodeFunctionData(functionFragment: "users", values: [string]): string;
   encodeFunctionData(
-    functionFragment: "wasabiPerBlock",
+    functionFragment: "usdPerBlock",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "users", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "withdrawal",
+    values: [string, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "accAmountPerShare",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "changeInterestRatePerBlock",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseProductivity",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "enter", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "exit", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getProductivity",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getStatus", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "impl", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "incNounce", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "increaseProductivity",
+    functionFragment: "interestsPerBlock",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "interestsPerBlock",
+    functionFragment: "lastRewardBlock",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
@@ -156,7 +165,6 @@ interface ERC2917ImplInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "nounce", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "take", data: BytesLike): Result;
   decodeFunctionResult(
@@ -168,14 +176,14 @@ interface ERC2917ImplInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "totalProductivity",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "totalSupply",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "upgradeGovernance",
     data: BytesLike
@@ -184,14 +192,14 @@ interface ERC2917ImplInterface extends ethers.utils.Interface {
     functionFragment: "upgradeImpl",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "users", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "wasabiPerBlock",
+    functionFragment: "usdPerBlock",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "users", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdrawal", data: BytesLike): Result;
 
   events: {
-    "Approval(address,address,uint256)": EventFragment;
     "GovernorChanged(address,address)": EventFragment;
     "ImplChanged(address,address)": EventFragment;
     "InterestRatePerBlockChanged(uint256,uint256)": EventFragment;
@@ -200,7 +208,6 @@ interface ERC2917ImplInterface extends ethers.utils.Interface {
     "Transfer(address,address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "GovernorChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ImplChanged"): EventFragment;
   getEvent(
@@ -255,29 +262,9 @@ export class ERC2917Impl extends Contract {
   interface: ERC2917ImplInterface;
 
   functions: {
-    allowance(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    accAmountPerShare(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "allowance(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    approve(
-      spender: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "approve(address,uint256)"(
-      spender: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    "accAmountPerShare()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     balanceOf(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -300,15 +287,39 @@ export class ERC2917Impl extends Contract {
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
 
-    decreaseProductivity(
-      user: string,
-      value: BigNumberish,
+    deposit(
+      account: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "decreaseProductivity(address,uint256)"(
-      user: string,
-      value: BigNumberish,
+    "deposit(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    enter(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "enter(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    exit(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "exit(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -322,6 +333,14 @@ export class ERC2917Impl extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber]>;
 
+    getStatus(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber]>;
+
+    "getStatus()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber]>;
+
     governor(overrides?: CallOverrides): Promise<[string]>;
 
     "governor()"(overrides?: CallOverrides): Promise<[string]>;
@@ -330,29 +349,13 @@ export class ERC2917Impl extends Contract {
 
     "impl()"(overrides?: CallOverrides): Promise<[string]>;
 
-    incNounce(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "incNounce()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    increaseProductivity(
-      user: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "increaseProductivity(address,uint256)"(
-      user: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     interestsPerBlock(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "interestsPerBlock()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    lastRewardBlock(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "lastRewardBlock()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     mint(
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -369,10 +372,6 @@ export class ERC2917Impl extends Contract {
     name(overrides?: CallOverrides): Promise<[string]>;
 
     "name()"(overrides?: CallOverrides): Promise<[string]>;
-
-    nounce(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "nounce()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
@@ -398,33 +397,23 @@ export class ERC2917Impl extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber]>;
 
+    totalProductivity(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "totalProductivity()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transfer(
-      to: string,
-      value: BigNumberish,
+      recipient: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     "transfer(address,uint256)"(
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "transferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      value: BigNumberish,
+      recipient: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -448,6 +437,10 @@ export class ERC2917Impl extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    usdPerBlock(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "usdPerBlock()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     users(
       arg0: string,
       overrides?: CallOverrides
@@ -462,34 +455,22 @@ export class ERC2917Impl extends Contract {
       [BigNumber, BigNumber] & { amount: BigNumber; rewardDebt: BigNumber }
     >;
 
-    wasabiPerBlock(overrides?: CallOverrides): Promise<[BigNumber]>;
+    withdrawal(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    "wasabiPerBlock()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "withdrawal(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
-  allowance(
-    arg0: string,
-    arg1: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  accAmountPerShare(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "allowance(address,address)"(
-    arg0: string,
-    arg1: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  approve(
-    spender: string,
-    value: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "approve(address,uint256)"(
-    spender: string,
-    value: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  "accAmountPerShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -512,15 +493,39 @@ export class ERC2917Impl extends Contract {
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
 
-  decreaseProductivity(
-    user: string,
-    value: BigNumberish,
+  deposit(
+    account: string,
+    amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "decreaseProductivity(address,uint256)"(
-    user: string,
-    value: BigNumberish,
+  "deposit(address,uint256)"(
+    account: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  enter(
+    account: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "enter(address,uint256)"(
+    account: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  exit(
+    account: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "exit(address,uint256)"(
+    account: string,
+    amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -534,6 +539,14 @@ export class ERC2917Impl extends Contract {
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber]>;
 
+  getStatus(
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber]>;
+
+  "getStatus()"(
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber]>;
+
   governor(overrides?: CallOverrides): Promise<string>;
 
   "governor()"(overrides?: CallOverrides): Promise<string>;
@@ -542,29 +555,13 @@ export class ERC2917Impl extends Contract {
 
   "impl()"(overrides?: CallOverrides): Promise<string>;
 
-  incNounce(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "incNounce()"(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  increaseProductivity(
-    user: string,
-    value: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "increaseProductivity(address,uint256)"(
-    user: string,
-    value: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   interestsPerBlock(overrides?: CallOverrides): Promise<BigNumber>;
 
   "interestsPerBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  lastRewardBlock(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "lastRewardBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   mint(
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -581,10 +578,6 @@ export class ERC2917Impl extends Contract {
   name(overrides?: CallOverrides): Promise<string>;
 
   "name()"(overrides?: CallOverrides): Promise<string>;
-
-  nounce(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "nounce()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   symbol(overrides?: CallOverrides): Promise<string>;
 
@@ -605,33 +598,23 @@ export class ERC2917Impl extends Contract {
 
   "takeWithBlock()"(overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
+  totalProductivity(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "totalProductivity()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   transfer(
-    to: string,
-    value: BigNumberish,
+    recipient: string,
+    amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   "transfer(address,uint256)"(
-    to: string,
-    value: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  transferFrom(
-    from: string,
-    to: string,
-    value: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "transferFrom(address,address,uint256)"(
-    from: string,
-    to: string,
-    value: BigNumberish,
+    recipient: string,
+    amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -655,6 +638,10 @@ export class ERC2917Impl extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  usdPerBlock(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "usdPerBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   users(
     arg0: string,
     overrides?: CallOverrides
@@ -669,34 +656,22 @@ export class ERC2917Impl extends Contract {
     [BigNumber, BigNumber] & { amount: BigNumber; rewardDebt: BigNumber }
   >;
 
-  wasabiPerBlock(overrides?: CallOverrides): Promise<BigNumber>;
+  withdrawal(
+    account: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  "wasabiPerBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
+  "withdrawal(address,uint256)"(
+    account: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
-    allowance(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    accAmountPerShare(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "allowance(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    approve(
-      spender: string,
-      value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "approve(address,uint256)"(
-      spender: string,
-      value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    "accAmountPerShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -719,15 +694,39 @@ export class ERC2917Impl extends Contract {
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
 
-    decreaseProductivity(
-      user: string,
-      value: BigNumberish,
+    deposit(
+      account: string,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "decreaseProductivity(address,uint256)"(
-      user: string,
-      value: BigNumberish,
+    "deposit(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    enter(
+      account: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "enter(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    exit(
+      account: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "exit(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -741,6 +740,14 @@ export class ERC2917Impl extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber]>;
 
+    getStatus(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber]>;
+
+    "getStatus()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber]>;
+
     governor(overrides?: CallOverrides): Promise<string>;
 
     "governor()"(overrides?: CallOverrides): Promise<string>;
@@ -749,25 +756,13 @@ export class ERC2917Impl extends Contract {
 
     "impl()"(overrides?: CallOverrides): Promise<string>;
 
-    incNounce(overrides?: CallOverrides): Promise<void>;
-
-    "incNounce()"(overrides?: CallOverrides): Promise<void>;
-
-    increaseProductivity(
-      user: string,
-      value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "increaseProductivity(address,uint256)"(
-      user: string,
-      value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     interestsPerBlock(overrides?: CallOverrides): Promise<BigNumber>;
 
     "interestsPerBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    lastRewardBlock(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "lastRewardBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     mint(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -780,10 +775,6 @@ export class ERC2917Impl extends Contract {
     name(overrides?: CallOverrides): Promise<string>;
 
     "name()"(overrides?: CallOverrides): Promise<string>;
-
-    nounce(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "nounce()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     symbol(overrides?: CallOverrides): Promise<string>;
 
@@ -809,33 +800,23 @@ export class ERC2917Impl extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber]>;
 
+    totalProductivity(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "totalProductivity()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
-      to: string,
-      value: BigNumberish,
+      recipient: string,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "transfer(address,uint256)"(
-      to: string,
-      value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "transferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      value: BigNumberish,
+      recipient: string,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -856,6 +837,10 @@ export class ERC2917Impl extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    usdPerBlock(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "usdPerBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     users(
       arg0: string,
       overrides?: CallOverrides
@@ -870,21 +855,20 @@ export class ERC2917Impl extends Contract {
       [BigNumber, BigNumber] & { amount: BigNumber; rewardDebt: BigNumber }
     >;
 
-    wasabiPerBlock(overrides?: CallOverrides): Promise<BigNumber>;
+    withdrawal(
+      account: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    "wasabiPerBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "withdrawal(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
-    Approval(
-      owner: string | null,
-      spender: string | null,
-      value: null
-    ): TypedEventFilter<
-      [string, string, BigNumber],
-      { owner: string; spender: string; value: BigNumber }
-    >;
-
     GovernorChanged(
       _oldGovernor: string | null,
       _newGovernor: string | null
@@ -936,29 +920,9 @@ export class ERC2917Impl extends Contract {
   };
 
   estimateGas: {
-    allowance(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    accAmountPerShare(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "allowance(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    approve(
-      spender: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "approve(address,uint256)"(
-      spender: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    "accAmountPerShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -981,15 +945,39 @@ export class ERC2917Impl extends Contract {
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    decreaseProductivity(
-      user: string,
-      value: BigNumberish,
+    deposit(
+      account: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "decreaseProductivity(address,uint256)"(
-      user: string,
-      value: BigNumberish,
+    "deposit(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    enter(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "enter(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    exit(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "exit(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1003,6 +991,10 @@ export class ERC2917Impl extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getStatus(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getStatus()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     governor(overrides?: CallOverrides): Promise<BigNumber>;
 
     "governor()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1011,29 +1003,13 @@ export class ERC2917Impl extends Contract {
 
     "impl()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    incNounce(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "incNounce()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    increaseProductivity(
-      user: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "increaseProductivity(address,uint256)"(
-      user: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     interestsPerBlock(overrides?: CallOverrides): Promise<BigNumber>;
 
     "interestsPerBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    lastRewardBlock(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "lastRewardBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     mint(
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1050,10 +1026,6 @@ export class ERC2917Impl extends Contract {
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    nounce(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "nounce()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1077,33 +1049,23 @@ export class ERC2917Impl extends Contract {
 
     "takeWithBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    totalProductivity(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "totalProductivity()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
-      to: string,
-      value: BigNumberish,
+      recipient: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     "transfer(address,uint256)"(
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "transferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      value: BigNumberish,
+      recipient: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1127,6 +1089,10 @@ export class ERC2917Impl extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    usdPerBlock(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "usdPerBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     users(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "users(address)"(
@@ -1134,34 +1100,24 @@ export class ERC2917Impl extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    wasabiPerBlock(overrides?: CallOverrides): Promise<BigNumber>;
+    withdrawal(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    "wasabiPerBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "withdrawal(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    allowance(
-      arg0: string,
-      arg1: string,
+    accAmountPerShare(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "accAmountPerShare()"(
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "allowance(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    approve(
-      spender: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "approve(address,uint256)"(
-      spender: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     balanceOf(
@@ -1188,15 +1144,39 @@ export class ERC2917Impl extends Contract {
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    decreaseProductivity(
-      user: string,
-      value: BigNumberish,
+    deposit(
+      account: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "decreaseProductivity(address,uint256)"(
-      user: string,
-      value: BigNumberish,
+    "deposit(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    enter(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "enter(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    exit(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "exit(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1210,6 +1190,10 @@ export class ERC2917Impl extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getStatus(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "getStatus()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "governor()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1218,29 +1202,15 @@ export class ERC2917Impl extends Contract {
 
     "impl()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    incNounce(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "incNounce()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    increaseProductivity(
-      user: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "increaseProductivity(address,uint256)"(
-      user: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     interestsPerBlock(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "interestsPerBlock()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    lastRewardBlock(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "lastRewardBlock()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1261,10 +1231,6 @@ export class ERC2917Impl extends Contract {
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    nounce(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "nounce()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1288,33 +1254,25 @@ export class ERC2917Impl extends Contract {
 
     "takeWithBlock()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    totalProductivity(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "totalProductivity()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transfer(
-      to: string,
-      value: BigNumberish,
+      recipient: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     "transfer(address,uint256)"(
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "transferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      value: BigNumberish,
+      recipient: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1338,6 +1296,10 @@ export class ERC2917Impl extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    usdPerBlock(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "usdPerBlock()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     users(
       arg0: string,
       overrides?: CallOverrides
@@ -1348,10 +1310,16 @@ export class ERC2917Impl extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    wasabiPerBlock(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    withdrawal(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    "wasabiPerBlock()"(
-      overrides?: CallOverrides
+    "withdrawal(address,uint256)"(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
